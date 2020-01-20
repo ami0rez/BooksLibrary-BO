@@ -1,0 +1,13 @@
+C:\Users\amine\source\repos\BooksLibrary\InfrastructureLayer\bin\Debug\netcoreapp2.1\InfrastructureLayer.deps.json
+C:\Users\amine\source\repos\BooksLibrary\InfrastructureLayer\bin\Debug\netcoreapp2.1\InfrastructureLayer.runtimeconfig.json
+C:\Users\amine\source\repos\BooksLibrary\InfrastructureLayer\bin\Debug\netcoreapp2.1\InfrastructureLayer.runtimeconfig.dev.json
+C:\Users\amine\source\repos\BooksLibrary\InfrastructureLayer\bin\Debug\netcoreapp2.1\InfrastructureLayer.dll
+C:\Users\amine\source\repos\BooksLibrary\InfrastructureLayer\bin\Debug\netcoreapp2.1\InfrastructureLayer.pdb
+C:\Users\amine\source\repos\BooksLibrary\InfrastructureLayer\bin\Debug\netcoreapp2.1\Core.dll
+C:\Users\amine\source\repos\BooksLibrary\InfrastructureLayer\bin\Debug\netcoreapp2.1\Core.pdb
+C:\Users\amine\source\repos\BooksLibrary\InfrastructureLayer\obj\Debug\netcoreapp2.1\InfrastructureLayer.csprojAssemblyReference.cache
+C:\Users\amine\source\repos\BooksLibrary\InfrastructureLayer\obj\Debug\netcoreapp2.1\InfrastructureLayer.AssemblyInfoInputs.cache
+C:\Users\amine\source\repos\BooksLibrary\InfrastructureLayer\obj\Debug\netcoreapp2.1\InfrastructureLayer.AssemblyInfo.cs
+C:\Users\amine\source\repos\BooksLibrary\InfrastructureLayer\obj\Debug\netcoreapp2.1\InfrastructureLayer.csproj.CopyComplete
+C:\Users\amine\source\repos\BooksLibrary\InfrastructureLayer\obj\Debug\netcoreapp2.1\InfrastructureLayer.dll
+C:\Users\amine\source\repos\BooksLibrary\InfrastructureLayer\obj\Debug\netcoreapp2.1\InfrastructureLayer.pdb

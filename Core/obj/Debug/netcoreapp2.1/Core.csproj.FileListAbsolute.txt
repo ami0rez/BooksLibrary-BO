@@ -1,0 +1,8 @@
+C:\Users\amine\source\repos\BooksLibrary\Core\bin\Debug\netcoreapp2.1\Core.deps.json
+C:\Users\amine\source\repos\BooksLibrary\Core\bin\Debug\netcoreapp2.1\Core.dll
+C:\Users\amine\source\repos\BooksLibrary\Core\bin\Debug\netcoreapp2.1\Core.pdb
+C:\Users\amine\source\repos\BooksLibrary\Core\obj\Debug\netcoreapp2.1\Core.AssemblyInfoInputs.cache
+C:\Users\amine\source\repos\BooksLibrary\Core\obj\Debug\netcoreapp2.1\Core.AssemblyInfo.cs
+C:\Users\amine\source\repos\BooksLibrary\Core\obj\Debug\netcoreapp2.1\Core.dll
+C:\Users\amine\source\repos\BooksLibrary\Core\obj\Debug\netcoreapp2.1\Core.pdb
+C:\Users\amine\source\repos\BooksLibrary\Core\obj\Debug\netcoreapp2.1\Core.csprojAssemblyReference.cache
