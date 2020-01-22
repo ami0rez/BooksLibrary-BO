@@ -1,25 +1,28 @@
-import React, { useState } from 'react';
-import { DropdownToggle, DropdownMenu, DropdownItem, UncontrolledDropdown } from 'reactstrap';
+import React from 'react';
+import { NavDropdown } from 'react-bootstrap';
+import PropTypes from 'prop-types'
+import { AdminMenu, EditorMenu } from '../../../../business/constants/connectedUserMenus';
 
-const UserDetails = ({ Name, actions }) => {
-  const [dropdownOpen, setOpen] = useState(false);
+const UserDetails = ({ authentication }) => {
+  const { user } = authentication;
+  const actions = user.role === 0 ? AdminMenu : EditorMenu;
+  return (<
+    NavDropdown title={`${user.firstName} ${user.lastName}`} id="basic-nav-dropdown">
+    {
+      actions.map((action, key) => (
+        <NavDropdown.Item href={action.path}>{action.name}</NavDropdown.Item>
+      ))
+    }
+  </NavDropdown>
+  )
 
-  const toggle = () => setOpen(!dropdownOpen);
-
-  return (
-    <UncontrolledDropdown isOpen={dropdownOpen} toggle={toggle}>
-      <DropdownToggle nav caret>
-        {Name}
-      </DropdownToggle>
-      <DropdownMenu right>
-        {
-          actions.map(child => (
-            <DropdownItem key={child.name} onClick={console.log("yaay")}>{child.name}</DropdownItem>
-          ))
-        }
-      </DropdownMenu>
-    </UncontrolledDropdown>
-  );
 }
-
+UserDetails.propTypes = {
+  name: PropTypes.string,
+  actions: PropTypes.array,
+}
+UserDetails.defaultProps = {
+  name: "",
+  actions: [],
+}
 export default UserDetails;

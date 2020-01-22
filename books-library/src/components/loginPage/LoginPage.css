@@ -1,0 +1,19 @@
+#login {
+    width: 50%;
+    margin: auto;
+    margin-top: 10%;
+    border: solid #0000008e 2px;
+    padding: 6% 3%;
+    box-shadow: 3px 3px 8px black;
+    background-color: #00000070;
+    padding: relative;
+    color: bisque;
+}
+#login #login-button {
+    float: right;
+}
+
+#login-background{
+    background-position: center;
+    background-size: cover;
+}

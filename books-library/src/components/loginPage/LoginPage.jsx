@@ -1,17 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { logout, login } from '../../Actions/UserActions';
 import { Button, Form } from 'react-bootstrap';
 import PropTypes from 'prop-types'
 import patterns from '../../business/constants/patterns';
+
+import './LoginPage.css'
 
 
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
-
-    // reset login status
-    props.logout();
 
     this.state = {
       email: '',
@@ -27,9 +24,12 @@ class LoginPage extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const { login } = this.props;
-    const { username, password } = this.state;
-    if (username && password) {
-      login(username, password);
+    const { email, password } = this.state;
+
+    console.log(this.state);
+
+    if (email && password) {
+      login(email, password);
     }
   }
 
@@ -41,8 +41,8 @@ class LoginPage extends React.Component {
   render() {
     const { email, password } = this.state;
     return (
-      <div className="Login">
-        <form onSubmit={this.handleSubmit}>
+      <div id="login-background">
+        <div id="login">
           <Form onSubmit={this.handleSubmit}>
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
@@ -52,7 +52,6 @@ class LoginPage extends React.Component {
                 placeholder="Enter email"
                 value={email}
                 onChange={this.handleChange}
-                pattern={patterns.EMAIL_PATTERN}
               />
             </Form.Group>
 
@@ -69,12 +68,12 @@ class LoginPage extends React.Component {
             <Form.Group controlId="formBasicCheckbox">
               <Form.Check type="checkbox" label="Check me out" />
             </Form.Group>
-            <Button variant="primary" type="submit">
-              Submit
+            <Button id="login-button" variant="primary" type="submit">
+              Login
             </Button>
           </Form>
-        </form >
-      </div >
+        </div >
+      </div>
     );
   }
 }

@@ -1,20 +1,27 @@
 import React from 'react'
-import { Card, CardTitle, CardText, Button } from 'reactstrap'
+import { Card, Button } from 'react-bootstrap';
+import { CardTitle, CardText } from 'react-bootstrap/Card';
 
 const SimpleCard = ({ imageUrl, title, url }) => {
-    const handleClick = () => {
-        var win = window.open(url, '_blank');
-        win.focus();
-    }
-    return (
-        <div>
-            <Card body inverse style={{ backgroundColor: '#333', borderColor: '#333' }}>
-                <CardTitle>{title}</CardTitle>
-                <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                <Button onClick={handleClick}>GoTo</Button>
-            </Card>
-        </div>
-    )
+  const handleClick = () => {
+    var win = window.open(url, '_blank');
+    win.focus();
+  }
+  return (
+    <div>
+      <Card style={{ width: '18rem' }}>
+        <Card.Img variant="top" src="holder.js/100px180" />
+        <Card.Body>
+          <Card.Title>Card Title</Card.Title>
+          <Card.Text>
+            Some quick example text to build on the card title and make up the bulk of
+            the card's content.
+          </Card.Text>
+          <Button variant="primary">Go somewhere</Button>
+        </Card.Body>
+      </Card>
+    </div>
+  )
 }
 
 export default SimpleCard

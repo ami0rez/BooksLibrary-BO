@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { FormGroup, Label, Input, FormText } from 'reactstrap';
 import Autocomplete from 'react-autocomplete';
+import { FormGroup, Form } from 'react-bootstrap';
 
 const SingleFilter = ({
     title,
@@ -19,7 +19,7 @@ const SingleFilter = ({
     return (
         <div>
             <FormGroup>
-                <Label for="exampleEmail">{title}</Label>
+                <Form.Label id="filter-label" for="exampleEmail">{title}</Form.Label>
                 <Autocomplete
                     getItemValue={(item) => item.name || ""}
                     items={options || []}

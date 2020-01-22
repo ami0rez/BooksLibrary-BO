@@ -1,9 +1,9 @@
 import React from 'react'
-import { Button } from 'reactstrap';
 import globalStrings from '../../../../strings/globalStrings';
+import { Button } from 'react-bootstrap';
 const ConnectionButton = ({ onClick }) => {
     return (
-        <Button color="danger" onClick={() => onClick()}> {globalStrings.Actions.CONNECT}</Button >
+        <Button variant="danger" onClick={() => onClick()}> {globalStrings.Actions.CONNECT}</Button >
     )
 }
 

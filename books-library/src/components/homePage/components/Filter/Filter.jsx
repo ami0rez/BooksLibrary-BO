@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import SingleFilter from './SingleFilter';
+
+import './Filter.css'
 const Filter = ({ options,
-  onChange,
+  updateFilter,
 }) => {
   const [internalOptions, setInternalOptions] = useState(options);
   const handleChange = (newProperty) => {
@@ -11,10 +13,10 @@ const Filter = ({ options,
     })
   }
   useEffect(() => {
-    onChange(internalOptions);
+    updateFilter(internalOptions);
   }, [internalOptions])
   return (
-    <div>
+    <div id="filter">
       {/* Author */}
       <SingleFilter
         title="Author"
@@ -55,6 +57,6 @@ const Filter = ({ options,
 }
 Filter.defaultProps = {
   options: [],
-  onChange: () => { }
+  updateFilter: () => { }
 }
 export default Filter

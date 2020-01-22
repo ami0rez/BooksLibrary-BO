@@ -1,0 +1,9 @@
+#filter{
+    display: flex;
+    padding: 0%;
+}
+
+#filter-label{
+    padding: 0%;
+    font-size: 12px;
+}
