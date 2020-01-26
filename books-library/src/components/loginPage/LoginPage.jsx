@@ -25,9 +25,6 @@ class LoginPage extends React.Component {
     e.preventDefault();
     const { login } = this.props;
     const { email, password } = this.state;
-
-    console.log(this.state);
-
     if (email && password) {
       login(email, password);
     }

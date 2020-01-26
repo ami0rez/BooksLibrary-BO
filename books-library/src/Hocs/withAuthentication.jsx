@@ -12,8 +12,6 @@ const isUserConnected = (Component, NotAuthenticatedComponent) => {
   class AuthenticationCheck extends React.Component {
     render() {
       const { authentication } = this.props;
-      console.log("be3da ma here", this.props);
-
       return (
         authentication.loggedIn
           ? (

@@ -1,14 +1,13 @@
 import React from 'react'
-import Filter from './components/Filter/Filter';
-import CardsList from './UI/CardsList';
+import FilterContainer from './components/Filter/FilterContainer';
+import BookListContainer from './components/BookList/BookCard/BookListContainer';
 
 const HomePage = () => {
     return (
         <div>
-            <Filter
+            <FilterContainer
             />
-            <CardsList
-            />
+            <BookListContainer />
         </div>
     )
 }

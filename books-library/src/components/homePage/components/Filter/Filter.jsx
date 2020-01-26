@@ -2,54 +2,62 @@ import React, { useState, useEffect } from 'react';
 import SingleFilter from './SingleFilter';
 
 import './Filter.css'
-const Filter = ({ options,
-  updateFilter,
-}) => {
-  const [internalOptions, setInternalOptions] = useState(options);
+
+const selectedFilters = {
+  authors: [],
+  editors: [],
+  categories: [],
+  subCategories: [],
+  tags: [],
+}
+const Filter = ({ filters, getFilters }) => {
+  const [internalOptions, setInternalOptions] = useState(filters);
+  const [selected, setSelected] = useState(selectedFilters);
   const handleChange = (newProperty) => {
-    setInternalOptions({
-      ...internalOptions,
-      newProperty,
+    setSelected({
+      ...selected,
+      ...newProperty,
     })
   }
+
   useEffect(() => {
-    updateFilter(internalOptions);
-  }, [internalOptions])
+    getFilters(selected);
+  }, [selected])
   return (
     <div id="filter">
       {/* Author */}
       <SingleFilter
         title="Author"
-        options={options.authors}
-        onChange={(value => handleChange({ selectedAuthor: value }))}
-        selectedValue="ZZZ"
+        options={filters.authors}
+        onChange={(value => handleChange({ authors: value }))}
+        selectedValue=""
       />
       {/* Editor */}
       <SingleFilter
         title="Editor"
-        options={options.editors}
-        onChange={(value => handleChange({ selectedEditor: value }))}
-        selectedValue="ZZZ"
+        options={filters.editors}
+        onChange={(value => handleChange({ editors: value }))}
+        selectedValue=""
       />
       {/* Category */}
       <SingleFilter
         title="Category"
-        options={options.category}
-        onChange={(value => handleChange({ selectedCategory: value }))}
+        options={filters.categories}
+        onChange={(value => handleChange({ categories: value }))}
         selectedValue="ZZZ"
       />
       {/* SubCategory */}
       <SingleFilter
         title="SubCategory"
-        options={options.subCategory}
-        onChange={(value => handleChange({ selectedSubCategory: value }))}
+        options={filters.subCategories}
+        onChange={(value => handleChange({ subCategories: value }))}
         selectedValue="ZZZ"
       />
       {/* Tags */}
       <SingleFilter
         title="Tags"
-        options={options.tag}
-        onChange={(value => handleChange({ selectedTag: value }))}
+        options={filters.tags}
+        onChange={(value => handleChange({ tag: value }))}
         selectedValue="ZZZ"
       />
     </div>

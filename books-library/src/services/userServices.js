@@ -18,7 +18,6 @@ function login(email, password) {
         .then(handleResponse)
         .then(user => {
             localStorage.setItem('user', JSON.stringify(user));
-            console.log("user is set");
             return user;
         });
 }

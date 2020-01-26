@@ -1,0 +1,13 @@
+#admin-table{
+    margin: 0 4vw;
+}
+#admin-table-controls{
+    float: right;
+    margin: 2% 0;
+    border-bottom: rgba(0, 0, 0, 0.507) solid 1px;
+    width: 100%;
+}
+#admin-table-controls button{
+    float: right;
+    margin-bottom: 1%;
+}

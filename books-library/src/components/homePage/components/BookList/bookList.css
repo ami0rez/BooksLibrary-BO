@@ -1,0 +1,39 @@
+#book-list{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+
+.book-item{
+  flex-basis: 23%;
+  margin-bottom: 2%;
+}
+
+#book-card{
+  display: flex;
+  height: 240px;
+}
+
+.book-card-card{
+  flex-grow: 1;
+  }
+  
+.card-image{
+  padding: 1vh;
+  height: 180px;
+}
+
+.card-footer{
+  display: flex;
+  height: 60px;
+}
+
+.card-footer-title{
+  flex-grow: 1;
+  font-style: italic;
+}
+#card-footer-image{
+  width: 40px;
+  cursor: pointer;
+}

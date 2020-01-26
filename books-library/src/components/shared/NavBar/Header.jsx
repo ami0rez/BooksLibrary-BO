@@ -7,6 +7,7 @@ import globalStrings from '../../../strings/globalStrings';
 import UserDetails from './UI/UserDetails';
 import ConnectionButton from './UI/ConnectionButton';
 import withAuthentication from '../../../Hocs/withAuthentication';
+import NavSearch from './UI/NavSearch';
 const RelativeComponent = withAuthentication(UserDetails, ConnectionButton);
 const Header = ({ userInfos }) => {
   return (
@@ -19,6 +20,7 @@ const Header = ({ userInfos }) => {
           name={userInfos && userInfos.name}
           actions={userInfos && userInfos.actions}
         /> */}
+        <NavSearch />
         <RelativeComponent />
       </Navbar>
     </div >

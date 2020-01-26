@@ -7,30 +7,30 @@ export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const AUTHENTICATION_LOGOUT = 'AUTHENTICATION_LOGOUT';
 
 export const login = (username, password) => {
-    return dispatch => {
-        dispatch(request({ username }));
+  return dispatch => {
+    dispatch(request({ username }));
 
-        userServices.login(username, password)
-            .then(
-                user => {
-                    dispatch(success(user));
-                    history.push('/');
-                },
-                error => {
-                    dispatch(failure(error));
-                    dispatch(alertActions.error(error));
-                }
-            );
-    };
+    userServices.login(username, password)
+      .then(
+        user => {
+          dispatch(success(user));
+          history.push('/');
+        },
+        error => {
+          dispatch(failure(error));
+          dispatch(alertActions.error(error));
+        }
+      );
+  };
 
-    function request(user) { return { type: LOGIN_REQUEST, user } }
-    function success(user) { return { type: LOGIN_SUCCESS, user } }
-    function failure(error) { return { type: LOGIN_FAILURE, error } }
+  function request(user) { return { type: LOGIN_REQUEST, user } }
+  function success(user) { return { type: LOGIN_SUCCESS, user } }
+  function failure(error) { return { type: LOGIN_FAILURE, error } }
 }
 
 export const logout = () => {
-    userServices.logout();
-    return { type: AUTHENTICATION_LOGOUT };
+  userServices.logout();
+  return { type: AUTHENTICATION_LOGOUT };
 }
 
 // function getAll() {

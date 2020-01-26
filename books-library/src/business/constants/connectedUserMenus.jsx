@@ -1,23 +1,19 @@
 export const AdminMenu = [
     {
         name: "Manage Editors",
-        path: "/admin/editors",
+        path: "/administration/editors",
     },
     {
         name: "Manage Categories",
-        path: "/admin/categories",
+        path: "/administration/categories",
     },
     {
         name: "Manage Tags",
-        path: "/admin/tags",
+        path: "/administration/tags",
     },
     {
         name: "Manage Authors",
-        path: "/admin/authors",
-    },
-    {
-        name: "Manage Ressources",
-        path: "/admin/ressources",
+        path: "/administration/authors",
     },
     {
         name: "Manage Profile",
