@@ -1,7 +1,3 @@
-C:\Users\amine\source\repos\BooksLibrary\BooksLibrary\obj\Debug\netcoreapp2.1\BooksLibrary.RazorAssemblyInfo.cache
-C:\Users\amine\source\repos\BooksLibrary\BooksLibrary\obj\Debug\netcoreapp2.1\BooksLibrary.RazorAssemblyInfo.cs
-C:\Users\amine\source\repos\BooksLibrary\BooksLibrary\obj\Debug\netcoreapp2.1\BooksLibrary.AssemblyInfoInputs.cache
-C:\Users\amine\source\repos\BooksLibrary\BooksLibrary\obj\Debug\netcoreapp2.1\BooksLibrary.AssemblyInfo.cs
 C:\Users\amine\source\repos\BooksLibrary\BooksLibrary\bin\Debug\netcoreapp2.1\appsettings.Development.json
 C:\Users\amine\source\repos\BooksLibrary\BooksLibrary\bin\Debug\netcoreapp2.1\appsettings.json
 C:\Users\amine\source\repos\BooksLibrary\BooksLibrary\bin\Debug\netcoreapp2.1\Properties\launchSettings.json
@@ -17,6 +13,10 @@ C:\Users\amine\source\repos\BooksLibrary\BooksLibrary\bin\Debug\netcoreapp2.1\Co
 C:\Users\amine\source\repos\BooksLibrary\BooksLibrary\bin\Debug\netcoreapp2.1\InfrastructureLayer.pdb
 C:\Users\amine\source\repos\BooksLibrary\BooksLibrary\bin\Debug\netcoreapp2.1\ServicesLayer.pdb
 C:\Users\amine\source\repos\BooksLibrary\BooksLibrary\obj\Debug\netcoreapp2.1\BooksLibrary.csprojAssemblyReference.cache
+C:\Users\amine\source\repos\BooksLibrary\BooksLibrary\obj\Debug\netcoreapp2.1\BooksLibrary.RazorAssemblyInfo.cache
+C:\Users\amine\source\repos\BooksLibrary\BooksLibrary\obj\Debug\netcoreapp2.1\BooksLibrary.RazorAssemblyInfo.cs
+C:\Users\amine\source\repos\BooksLibrary\BooksLibrary\obj\Debug\netcoreapp2.1\BooksLibrary.AssemblyInfoInputs.cache
+C:\Users\amine\source\repos\BooksLibrary\BooksLibrary\obj\Debug\netcoreapp2.1\BooksLibrary.AssemblyInfo.cs
 C:\Users\amine\source\repos\BooksLibrary\BooksLibrary\obj\Debug\netcoreapp2.1\BooksLibrary.RazorTargetAssemblyInfo.cache
 C:\Users\amine\source\repos\BooksLibrary\BooksLibrary\obj\Debug\netcoreapp2.1\BooksLibrary.csproj.CopyComplete
 C:\Users\amine\source\repos\BooksLibrary\BooksLibrary\obj\Debug\netcoreapp2.1\BooksLibrary.dll

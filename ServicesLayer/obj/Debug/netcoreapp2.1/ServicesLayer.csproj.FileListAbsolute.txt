@@ -1,6 +1,3 @@
-C:\Users\amine\source\repos\BooksLibrary\ServicesLayer\obj\Debug\netcoreapp2.1\ServicesLayer.csprojAssemblyReference.cache
-C:\Users\amine\source\repos\BooksLibrary\ServicesLayer\obj\Debug\netcoreapp2.1\ServicesLayer.AssemblyInfoInputs.cache
-C:\Users\amine\source\repos\BooksLibrary\ServicesLayer\obj\Debug\netcoreapp2.1\ServicesLayer.AssemblyInfo.cs
 C:\Users\amine\source\repos\BooksLibrary\ServicesLayer\bin\Debug\netcoreapp2.1\ServicesLayer.deps.json
 C:\Users\amine\source\repos\BooksLibrary\ServicesLayer\bin\Debug\netcoreapp2.1\ServicesLayer.dll
 C:\Users\amine\source\repos\BooksLibrary\ServicesLayer\bin\Debug\netcoreapp2.1\ServicesLayer.pdb
@@ -8,6 +5,9 @@ C:\Users\amine\source\repos\BooksLibrary\ServicesLayer\bin\Debug\netcoreapp2.1\C
 C:\Users\amine\source\repos\BooksLibrary\ServicesLayer\bin\Debug\netcoreapp2.1\InfrastructureLayer.dll
 C:\Users\amine\source\repos\BooksLibrary\ServicesLayer\bin\Debug\netcoreapp2.1\Core.pdb
 C:\Users\amine\source\repos\BooksLibrary\ServicesLayer\bin\Debug\netcoreapp2.1\InfrastructureLayer.pdb
+C:\Users\amine\source\repos\BooksLibrary\ServicesLayer\obj\Debug\netcoreapp2.1\ServicesLayer.csprojAssemblyReference.cache
+C:\Users\amine\source\repos\BooksLibrary\ServicesLayer\obj\Debug\netcoreapp2.1\ServicesLayer.AssemblyInfoInputs.cache
+C:\Users\amine\source\repos\BooksLibrary\ServicesLayer\obj\Debug\netcoreapp2.1\ServicesLayer.AssemblyInfo.cs
 C:\Users\amine\source\repos\BooksLibrary\ServicesLayer\obj\Debug\netcoreapp2.1\ServicesLayer.csproj.CopyComplete
 C:\Users\amine\source\repos\BooksLibrary\ServicesLayer\obj\Debug\netcoreapp2.1\ServicesLayer.dll
 C:\Users\amine\source\repos\BooksLibrary\ServicesLayer\obj\Debug\netcoreapp2.1\ServicesLayer.pdb

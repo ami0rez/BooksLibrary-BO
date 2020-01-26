@@ -13,5 +13,9 @@ namespace Core.Models
         public IList<int> Categories { get; set; }
         public IList<int> SubCategories { get; set; }
         public IList<int> Tags { get; set; }
+
+        public int? Start { get; set; }
+
+        public int? Length { get; set; }
     }
 }

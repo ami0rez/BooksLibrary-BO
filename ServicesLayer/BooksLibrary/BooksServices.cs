@@ -70,7 +70,7 @@ namespace ServicesLayer.BooksLibrary
             Book book = new Book
             {
                 Name = query.Name,
-                ImageLocation = query.ImageLocation,
+                BookImage = query.ImageBase64,
                 Ressource = query.Ressource,
                 AuthorLinks = bookAuthors.ToList(),
                 Editor = editor,
@@ -110,17 +110,19 @@ namespace ServicesLayer.BooksLibrary
                 .Include(b => b.AuthorLinks)
                 .Include(b => b.Editor)
                 .Include(b => b.SubCategoriesLink)
-                .Include(b => b.TagLinks);
+                .Include(b => b.TagLinks)
+                .Include(b => b.Ressource);
             var books1 = books
                 .Where(
                     b => (query.Authors == null || query.Authors.Count == 0 || b.AuthorLinks.Any(bA => query.Authors.Contains(bA.AuthorId)))
-                    && (query.Editors == null ||  query.Editors.Count == 0 || query.Editors.Contains(b.Editor.Id))
-                    && (query.SubCategories == null || query.SubCategories.Count == 0 || b.SubCategoriesLink.Any( bs => query.SubCategories.Contains(bs.SubCategoryId)))
+                    && (query.Editors == null || query.Editors.Count == 0 || query.Editors.Contains(b.Editor.Id))
+                    && (query.SubCategories == null || query.SubCategories.Count == 0 || b.SubCategoriesLink.Any(bs => query.SubCategories.Contains(bs.SubCategoryId)))
                     && (query.Tags == null || query.Tags.Count == 0 || b.TagLinks.Any(tag => query.Tags.Contains(tag.TagId)))
                     );
             var books2 = books1
             .GroupBy(
-                b => new { 
+                b => new
+                {
                     b.Editor,
                 }
                  )
@@ -158,7 +160,7 @@ namespace ServicesLayer.BooksLibrary
                     Id = b.Id,
                     Name = b.Name,
                     Editor = b.Editor,
-                    ImageLocation = b.ImageLocation,
+                    Base64Image = b.BookImage,
                     Ressource = b.Ressource,
                     Comment = b.Comment,
                     Authors = b.AuthorLinks.Select(al => al.Author).ToList(),
@@ -167,8 +169,14 @@ namespace ServicesLayer.BooksLibrary
                 }
                 )
                 ;
-
-            return books1.ToList();
+            if(books1.Count() == 0)
+            {
+                return new List<BookResponse>();
+            }
+            return books1
+                .Skip(query.Start ?? 0)
+                .Take(query.Length ?? books1.Count())
+                .ToList();
         }
     }
 }

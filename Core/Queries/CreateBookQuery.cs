@@ -11,7 +11,7 @@ namespace Core.Queries
         public string Name { get; set; }
 
         [Required]
-        public string ImageLocation { get; set; }
+        public string ImageBase64 { get; set; }
 
         [Required]
         public IList<int> Authors { get; set; }

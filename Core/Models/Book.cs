@@ -14,7 +14,7 @@ namespace Core.Models
         public string Name { get; set; }
 
         [Required]
-        public string ImageLocation { get; set; }
+        public string BookImage { get; set; }
 
         [Required]
         public IList<BookAuthors> AuthorLinks { get; set; }
