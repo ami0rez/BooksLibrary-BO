@@ -51,10 +51,10 @@ namespace InfrastructureLayer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("AccountId");
+
                     b.Property<string>("BookImage")
                         .IsRequired();
-
-                    b.Property<int>("EditorId");
 
                     b.Property<string>("Name")
                         .IsRequired();
@@ -63,7 +63,7 @@ namespace InfrastructureLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EditorId");
+                    b.HasIndex("AccountId");
 
                     b.HasIndex("RessourceId");
 
@@ -262,9 +262,9 @@ namespace InfrastructureLayer.Migrations
 
             modelBuilder.Entity("Core.Models.Book", b =>
                 {
-                    b.HasOne("Core.Models.Editor", "Editor")
+                    b.HasOne("Core.Models.Identification.Account", "Account")
                         .WithMany()
-                        .HasForeignKey("EditorId")
+                        .HasForeignKey("AccountId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Core.Models.Ressource", "Ressource")

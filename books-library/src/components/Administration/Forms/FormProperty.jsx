@@ -16,7 +16,7 @@ const RenderSimpleProperty = (
         as="select"
         disabled={readOnly}
         value={defaultValue}
-        onchange={(e) => { onChange(e.target.value) }}>
+        onChange={(e) => { onChange(e.target.value) }}>
         <option
           aria-label="select option"
         />
@@ -67,6 +67,8 @@ const FormProperty = ({
   }
   useEffect(() => {
     onChange(inputValue)
+    console.log(inputValue);
+
   }
     , [inputValue])
   useEffect(() => {

@@ -9,6 +9,7 @@ namespace ServicesLayer.BooksLibrary
     public interface IUserService
     {
         Account Authenticate(string username, string password);
-        IEnumerable<Account> GetAll();
+        Account GetProfile(int id);
+        Account Update(Account account);
     }
 }

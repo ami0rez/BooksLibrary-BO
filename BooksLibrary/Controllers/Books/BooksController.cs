@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Core.Models;
 using Core.Queries;
@@ -29,8 +31,17 @@ namespace BooksLibrary.Controllers.Books
         }
 
         // GET: api/Books/5
+        [HttpGet("editor", Name = "GetEdditorBooks")]
+        public IEnumerable<BookResponse> GetEditorBooks()
+        {
+            var accessToken = User.Identities.First().Claims;
+            var id = accessToken.SingleOrDefault(c => c.Type == ClaimTypes.Name).Value;
+            return _Books.GetEditorBooks(int.Parse(id));
+        }
+
+        // GET: api/Books/5
         [HttpGet("{id}", Name = "GetBooks")]
-        public Book Get(int id)
+        public BookResponse Get(int id)
         {
             return _Books.ReadOne(id);
         }
@@ -59,10 +70,29 @@ namespace BooksLibrary.Controllers.Books
 
         // POST: api/Books
         [HttpPost]
-        public ActionResult Post([FromBody] CreateBookQuery query)
+        public async Task<ActionResult> Post([FromBody] IFormCollection query)
         {
-            var createdBook = _Books.Create(query);
-            return Ok(createdBook);
+            //byte[] fileBytes;
+            //byte[] imageBytes;
+            //using (var memoryStream = new MemoryStream())
+            //{
+            //    await query.CopyToAsync(memoryStream);
+            //    fileBytes = memoryStream.ToArray();
+            //}
+            ////using (var memoryStream = new MemoryStream())
+            ////{
+            ////    await query.Image.CopyToAsync(memoryStream);
+            ////    imageBytes = memoryStream.ToArray();
+            ////}
+
+            //var filename = query.FileName;
+            //var contentType = query.ContentType;
+            ////System.IO.File.WriteAllBytes("resources\\" + filename, fileBytes);
+            ////query.RessourcePath = "resources\\" + filename;
+            ////query.ImageBase64 = Convert.ToBase64String(imageBytes);
+            ////var createdBook = _Books.Create(query);
+
+            return Ok();
         }
 
         // PUT: api/Books/5

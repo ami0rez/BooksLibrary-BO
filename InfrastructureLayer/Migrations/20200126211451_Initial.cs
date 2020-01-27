@@ -3,10 +3,47 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace InfrastructureLayer.Migrations
 {
-    public partial class removedTablesf : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Accounts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    FirstName = table.Column<string>(nullable: false),
+                    LastName = table.Column<string>(nullable: false),
+                    Email = table.Column<string>(nullable: false),
+                    PhoneNumber = table.Column<string>(nullable: false),
+                    Address = table.Column<string>(nullable: false),
+                    Password = table.Column<string>(nullable: true),
+                    Token = table.Column<string>(nullable: true),
+                    Role = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Accounts", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Authors",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    FirstName = table.Column<string>(nullable: false),
+                    LastName = table.Column<string>(nullable: false),
+                    Email = table.Column<string>(nullable: false),
+                    PhoneNumber = table.Column<string>(nullable: false),
+                    Address = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Authors", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Categories",
                 columns: table => new
@@ -52,6 +89,19 @@ namespace InfrastructureLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Tags",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tags", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "SubCategories",
                 columns: table => new
                 {
@@ -78,19 +128,17 @@ namespace InfrastructureLayer.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: false),
-                    ImageLocation = table.Column<string>(nullable: false),
-                    EditorId = table.Column<int>(nullable: false),
-                    AuthorId = table.Column<int>(nullable: false),
-                    RessourceId = table.Column<int>(nullable: false),
-                    SubCategoryId = table.Column<int>(nullable: false)
+                    BookImage = table.Column<string>(nullable: false),
+                    AccountId = table.Column<int>(nullable: false),
+                    RessourceId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Books", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Books_Editors_EditorId",
-                        column: x => x.EditorId,
-                        principalTable: "Editors",
+                        name: "FK_Books_Accounts_AccountId",
+                        column: x => x.AccountId,
+                        principalTable: "Accounts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -99,8 +147,54 @@ namespace InfrastructureLayer.Migrations
                         principalTable: "Ressources",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BookAuthors",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    BookId = table.Column<int>(nullable: false),
+                    AuthorId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BookAuthors", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Books_SubCategories_SubCategoryId",
+                        name: "FK_BookAuthors_Authors_AuthorId",
+                        column: x => x.AuthorId,
+                        principalTable: "Authors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_BookAuthors_Books_BookId",
+                        column: x => x.BookId,
+                        principalTable: "Books",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BookSubCategies",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    BookId = table.Column<int>(nullable: false),
+                    SubCategoryId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BookSubCategies", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BookSubCategies_Books_BookId",
+                        column: x => x.BookId,
+                        principalTable: "Books",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_BookSubCategies_SubCategories_SubCategoryId",
                         column: x => x.SubCategoryId,
                         principalTable: "SubCategories",
                         principalColumn: "Id",
@@ -108,27 +202,29 @@ namespace InfrastructureLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Author",
+                name: "BookTag",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    FirstName = table.Column<string>(nullable: false),
-                    LastName = table.Column<string>(nullable: false),
-                    Email = table.Column<string>(nullable: false),
-                    PhoneNumber = table.Column<string>(nullable: false),
-                    Address = table.Column<string>(nullable: false),
-                    BookId = table.Column<int>(nullable: true)
+                    BookId = table.Column<int>(nullable: false),
+                    TagId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Author", x => x.Id);
+                    table.PrimaryKey("PK_BookTag", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Author_Books_BookId",
+                        name: "FK_BookTag_Books_BookId",
                         column: x => x.BookId,
                         principalTable: "Books",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_BookTag_Tags_TagId",
+                        column: x => x.TagId,
+                        principalTable: "Tags",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -151,40 +247,20 @@ namespace InfrastructureLayer.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Tags",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
-                    BookId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Tags", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Tags_Books_BookId",
-                        column: x => x.BookId,
-                        principalTable: "Books",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
             migrationBuilder.CreateIndex(
-                name: "IX_Author_BookId",
-                table: "Author",
-                column: "BookId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Books_AuthorId",
-                table: "Books",
+                name: "IX_BookAuthors_AuthorId",
+                table: "BookAuthors",
                 column: "AuthorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Books_EditorId",
+                name: "IX_BookAuthors_BookId",
+                table: "BookAuthors",
+                column: "BookId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Books_AccountId",
                 table: "Books",
-                column: "EditorId");
+                column: "AccountId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Books_RessourceId",
@@ -192,9 +268,24 @@ namespace InfrastructureLayer.Migrations
                 column: "RessourceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Books_SubCategoryId",
-                table: "Books",
+                name: "IX_BookSubCategies_BookId",
+                table: "BookSubCategies",
+                column: "BookId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BookSubCategies_SubCategoryId",
+                table: "BookSubCategies",
                 column: "SubCategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BookTag_BookId",
+                table: "BookTag",
+                column: "BookId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BookTag_TagId",
+                table: "BookTag",
+                column: "TagId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_BookId",
@@ -205,29 +296,30 @@ namespace InfrastructureLayer.Migrations
                 name: "IX_SubCategories_CategoryId",
                 table: "SubCategories",
                 column: "CategoryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Tags_BookId",
-                table: "Tags",
-                column: "BookId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Books_Author_AuthorId",
-                table: "Books",
-                column: "AuthorId",
-                principalTable: "Author",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Author_Books_BookId",
-                table: "Author");
+            migrationBuilder.DropTable(
+                name: "BookAuthors");
+
+            migrationBuilder.DropTable(
+                name: "BookSubCategies");
+
+            migrationBuilder.DropTable(
+                name: "BookTag");
 
             migrationBuilder.DropTable(
                 name: "Comments");
+
+            migrationBuilder.DropTable(
+                name: "Editors");
+
+            migrationBuilder.DropTable(
+                name: "Authors");
+
+            migrationBuilder.DropTable(
+                name: "SubCategories");
 
             migrationBuilder.DropTable(
                 name: "Tags");
@@ -236,19 +328,13 @@ namespace InfrastructureLayer.Migrations
                 name: "Books");
 
             migrationBuilder.DropTable(
-                name: "Author");
+                name: "Categories");
 
             migrationBuilder.DropTable(
-                name: "Editors");
+                name: "Accounts");
 
             migrationBuilder.DropTable(
                 name: "Ressources");
-
-            migrationBuilder.DropTable(
-                name: "SubCategories");
-
-            migrationBuilder.DropTable(
-                name: "Categories");
         }
     }
 }

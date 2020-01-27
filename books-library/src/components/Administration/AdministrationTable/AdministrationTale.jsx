@@ -9,6 +9,9 @@ import InModal from '../../../Hocs/InModal';
 import './admin.css'
 const AdministrationTable = ({ content, entityName, deleteEntry, getAllEntries, Form }) => {
 	const [formModalData, setFormModalData] = useState({ show: false, entry: undefined });
+	useEffect(() => {
+		getAllEntries(entityName);
+	}, [])
 	const handleShowModal = (entry) => {
 		setFormModalData({ entry, show: true });
 	}
@@ -36,20 +39,25 @@ const AdministrationTable = ({ content, entityName, deleteEntry, getAllEntries, 
 		)
 	}
 	const listFormatter = (cell, row) => {
-		return (
-			<ul>
-				{
-					cell.map((item) => (
-						<li key="item">{item.name}</li>
-					))
-				}
-			</ul>
-		)
+		if (Array.isArray(cell)) {
+			return (
+				<ul>
+					{
+						cell.map((item) => (
+							<li key="item">{item.name}</li>
+						))
+					}
+				</ul>
+			)
+		} else {
+			return (<div>{`${cell.firstName || ''} ${cell.lastName || ''}`}</div>);
+		}
+
 	}
 	const columns = content.length
 		? [
 			...Object.keys(content[0]).map((entry) => (
-				Array.isArray(content[0][entry])
+				(Array.isArray(content[0][entry]) || Object.keys(content[0][entry]).length)
 					? { dataField: entry, text: entry, formatter: listFormatter, }
 					: { dataField: entry, text: entry }
 			)
@@ -60,15 +68,12 @@ const AdministrationTable = ({ content, entityName, deleteEntry, getAllEntries, 
 			}
 		]
 		: ["none"];
-	useEffect(() => {
-		getAllEntries(entityName);
-	}, [])
 	return (
 		<div id="admin-table">
 			<div id="admin-table-controls">
 				Manage {entityName}
 				<Button
-					onClick={handleShowModal}
+					onClick={() => handleShowModal()}
 				>
 					Add
 				</Button>

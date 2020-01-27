@@ -17,16 +17,40 @@ namespace ServicesLayer.BooksLibrary
 
         }
 
-        public Book ReadOne(int id)
+        public BookResponse ReadOne(int id)
         {
-            return _database.Books.SingleOrDefault(t => t.Id == id);
+            var response = new BookResponse();
+            var book = _database.Books
+                .Include(b => b.AuthorLinks)
+                .Include(b => b.Account)
+                .Include(b => b.SubCategoriesLink)
+                    .ThenInclude(subCLink => subCLink.SubCategory)
+                .Include(b => b.TagLinks)
+                    .ThenInclude(taglink => taglink.Tag)
+                .SingleOrDefault(t => t.Id == id);
+            response.Id = book.Id;
+            response.Name = book.Name;
+            response.Base64Image = book.BookImage;
+            response.Authors = book.AuthorLinks.Select(al => al.Author).ToList();
+            response.Editor = new Editor
+            {
+                Id = book.Account.Id,
+                Address = book.Account.Address,
+                Email = book.Account.Email,
+                FirstName = book.Account.FirstName,
+                LastName = book.Account.LastName,
+                PhoneNumber = book.Account.PhoneNumber,
+            };
+            response.SubCategories = book.SubCategoriesLink.Select(sl => sl.SubCategory).ToList();
+            response.Tags = book.TagLinks.Select(tl => tl.Tag).ToList();
+            return response;
         }
 
         public IEnumerable<Book> ReadAll()
         {
             return _database.Books
                 .Include(b => b.AuthorLinks)
-                .Include(b => b.Editor)
+                .Include(b => b.Account)
                 .Include(b => b.SubCategoriesLink)
                 .Include(b => b.TagLinks)
                 .ToList();
@@ -34,7 +58,8 @@ namespace ServicesLayer.BooksLibrary
 
         public Book Create(CreateBookQuery query)
         {
-            _database.Ressources.Add(query.Ressource);
+            var res = new Ressource { Location = query.RessourcePath };
+            _database.Ressources.Add(res);
             _database.SaveChanges();
             var subCategories = _database.SubCategories.Where(sc => query.SubCategories.Contains(sc.Id)).ToList();
             var bookSubCategories = subCategories.Select(
@@ -61,7 +86,7 @@ namespace ServicesLayer.BooksLibrary
                    TagId = a.Id
                }
                );
-            var editor = _database.Editors.SingleOrDefault(e => e.Id == query.EditorId);
+            var editor = _database.Accounts.SingleOrDefault(e => e.Id == query.EditorId);
             if (editor == null)
             {
                 throw new RecordNotFoundException("Could not find selected editor");
@@ -71,9 +96,17 @@ namespace ServicesLayer.BooksLibrary
             {
                 Name = query.Name,
                 BookImage = query.ImageBase64,
-                Ressource = query.Ressource,
+                Ressource = res,
                 AuthorLinks = bookAuthors.ToList(),
-                Editor = editor,
+                Account = new Core.Models.Identification.Account
+                {
+                    Id = editor.Id,
+                    Address = editor.Address,
+                    Email = editor.Email,
+                    FirstName = editor.FirstName,
+                    LastName = editor.LastName,
+                    PhoneNumber = editor.PhoneNumber,
+                },
                 TagLinks = bookTags.ToList(),
                 SubCategoriesLink = bookSubCategories.ToList(),
             };
@@ -108,14 +141,14 @@ namespace ServicesLayer.BooksLibrary
             filterOptions.Tags = new List<Tag>();
             var books = _database.Books
                 .Include(b => b.AuthorLinks)
-                .Include(b => b.Editor)
+                .Include(b => b.Account)
                 .Include(b => b.SubCategoriesLink)
                 .Include(b => b.TagLinks)
                 .Include(b => b.Ressource);
             var books1 = books
                 .Where(
                     b => (query.Authors == null || query.Authors.Count == 0 || b.AuthorLinks.Any(bA => query.Authors.Contains(bA.AuthorId)))
-                    && (query.Editors == null || query.Editors.Count == 0 || query.Editors.Contains(b.Editor.Id))
+                    && (query.Editors == null || query.Editors.Count == 0 || query.Editors.Contains(b.Account.Id))
                     && (query.SubCategories == null || query.SubCategories.Count == 0 || b.SubCategoriesLink.Any(bs => query.SubCategories.Contains(bs.SubCategoryId)))
                     && (query.Tags == null || query.Tags.Count == 0 || b.TagLinks.Any(tag => query.Tags.Contains(tag.TagId)))
                     );
@@ -123,7 +156,7 @@ namespace ServicesLayer.BooksLibrary
             .GroupBy(
                 b => new
                 {
-                    b.Editor,
+                    b.Account,
                 }
                  )
             .ToList();
@@ -133,7 +166,15 @@ namespace ServicesLayer.BooksLibrary
             books2.ForEach(
                 g =>
                 {
-                    filterOptions.Editors.Add(g.Key.Editor);
+                    filterOptions.Editors.Add((Editor)(Editor)new Editor
+                    {
+                        Id = g.Key.Account.Id,
+                        Address = g.Key.Account.Address,
+                        Email = g.Key.Account.Email,
+                        FirstName = g.Key.Account.FirstName,
+                        LastName = g.Key.Account.LastName,
+                        PhoneNumber = g.Key.Account.PhoneNumber,
+                    });
                 }
             );
             return filterOptions;
@@ -143,14 +184,15 @@ namespace ServicesLayer.BooksLibrary
         {
             var books = _database.Books
                 .Include(b => b.AuthorLinks)
-                .Include(b => b.Editor)
+                .Include(b => b.Account)
                 .Include(b => b.SubCategoriesLink)
                 .Include(b => b.TagLinks)
                 .Include(b => b.Ressource);
             var books1 = books
+                .Where(b => query.BookName == string.Empty || query.BookName == null || b.Name == query.BookName)
                 .Where(
                     b => (query.Authors == null || query.Authors.Count == 0 || b.AuthorLinks.Any(bA => query.Authors.Contains(bA.AuthorId)))
-                    && (query.Editors == null || query.Editors.Count == 0 || query.Editors.Contains(b.Editor.Id))
+                    && (query.Editors == null || query.Editors.Count == 0 || query.Editors.Contains(b.Account.Id))
                     && (query.SubCategories == null || query.SubCategories.Count == 0 || b.SubCategoriesLink.Any(bs => query.SubCategories.Contains(bs.SubCategoryId)))
                     && (query.Tags == null || query.Tags.Count == 0 || b.TagLinks.Any(tag => query.Tags.Contains(tag.TagId)))
                     )
@@ -159,7 +201,15 @@ namespace ServicesLayer.BooksLibrary
                 {
                     Id = b.Id,
                     Name = b.Name,
-                    Editor = b.Editor,
+                    Editor = new Editor
+                    {
+                        Id = b.Account.Id,
+                        Address = b.Account.Address,
+                        Email = b.Account.Email,
+                        FirstName = b.Account.FirstName,
+                        LastName = b.Account.LastName,
+                        PhoneNumber = b.Account.PhoneNumber,
+                    },
                     Base64Image = b.BookImage,
                     Ressource = b.Ressource,
                     Comment = b.Comment,
@@ -169,7 +219,7 @@ namespace ServicesLayer.BooksLibrary
                 }
                 )
                 ;
-            if(books1.Count() == 0)
+            if (books1.Count() == 0)
             {
                 return new List<BookResponse>();
             }
@@ -177,6 +227,45 @@ namespace ServicesLayer.BooksLibrary
                 .Skip(query.Start ?? 0)
                 .Take(query.Length ?? books1.Count())
                 .ToList();
+        }
+        public IEnumerable<BookResponse> GetEditorBooks(int id)
+        {
+            var books = _database.Books
+                .Include(b => b.AuthorLinks)
+                .Include(b => b.Account)
+                .Include(b => b.SubCategoriesLink)
+                .Include(b => b.TagLinks)
+                .Include(b => b.Ressource);
+            var books1 = books
+                .Where(b => b.Account.Id == id)
+                .Select(
+                b => new BookResponse
+                {
+                    Id = b.Id,
+                    Name = b.Name,
+                    Editor = new Editor
+                    {
+                        Id = b.Account.Id,
+                        Address = b.Account.Address,
+                        Email = b.Account.Email,
+                        FirstName = b.Account.FirstName,
+                        LastName = b.Account.LastName,
+                        PhoneNumber = b.Account.PhoneNumber,
+                    },
+                    Base64Image = b.BookImage,
+                    Ressource = b.Ressource,
+                    Comment = b.Comment,
+                    Authors = b.AuthorLinks.Select(al => al.Author).ToList(),
+                    SubCategories = b.SubCategoriesLink.Select(sl => sl.SubCategory).ToList(),
+                    Tags = b.TagLinks.Select(tl => tl.Tag).ToList()
+                }
+                )
+                ;
+            if (books1.Count() == 0)
+            {
+                return new List<BookResponse>();
+            }
+            return books1.ToList();
         }
     }
 }

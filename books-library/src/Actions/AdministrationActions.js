@@ -1,4 +1,5 @@
 import AdministrationServices from "../services/administrationServices";
+import { login } from "./UserActions";
 
 export const SET_CONTENT = 'SET_CONTENT';
 export const SET_ENTRY = 'SET_ENTRY';
@@ -51,6 +52,31 @@ export const getEntry = (entityName, id) => (dispatch) => {
       dispatch(
         setEntry(result),
       );
+    })
+    .catch((err) => {
+      console.error(err)
+    })
+}
+export const getProfile = () => (dispatch) => {
+  AdministrationServices.profile()
+    .then((result) => {
+      dispatch(
+        setEntry(result),
+      );
+    })
+    .catch((err) => {
+      console.error(err)
+    })
+}
+export const updateProfile = (profile) => (dispatch) => {
+  AdministrationServices.updareProfile(profile)
+    .then((result) => {
+      var user = localStorage.getItem('user');
+      var newUser = {
+        ...JSON.parse(user),
+        ...profile,
+      }
+      localStorage.setItem('user', JSON.stringify(newUser));
     })
     .catch((err) => {
       console.error(err)

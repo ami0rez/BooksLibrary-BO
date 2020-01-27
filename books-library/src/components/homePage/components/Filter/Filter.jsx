@@ -10,9 +10,9 @@ const selectedFilters = {
   subCategories: [],
   tags: [],
 }
-const Filter = ({ filters, getFilters }) => {
+const Filter = ({ options, filters, getFilters }) => {
   const [internalOptions, setInternalOptions] = useState(filters);
-  const [selected, setSelected] = useState(selectedFilters);
+  const [selected, setSelected] = useState(options);
   const handleChange = (newProperty) => {
     setSelected({
       ...selected,
@@ -57,7 +57,7 @@ const Filter = ({ filters, getFilters }) => {
       <SingleFilter
         title="Tags"
         options={filters.tags}
-        onChange={(value => handleChange({ tag: value }))}
+        onChange={(value => handleChange({ tags: value }))}
         selectedValue="ZZZ"
       />
     </div>

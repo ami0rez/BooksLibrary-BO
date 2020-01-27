@@ -1,4 +1,5 @@
-﻿using Core.Helpers;
+﻿using Core.Exceptions;
+using Core.Helpers;
 using Core.Models;
 using Core.Models.Identification;
 using InfrastructureLayer.DataAccess.BooksLibrary;
@@ -52,10 +53,33 @@ namespace ServicesLayer.BooksLibrary
 
             return user;
         }
-
-        public IEnumerable<Account> GetAll()
+        public Account Update(Account user)
         {
-            return _database.Accounts.ToList();
+            var _user = _database.Accounts.SingleOrDefault(x => x.Email == user.Email && x.Id != user.Id);
+
+            // return null if user not found
+            if (_user != null)
+            {
+                throw new RecordAlreadyExistsException("Emial Already Exists");
+            }
+            var account = _database.Accounts.SingleOrDefault(c => c.Id == user.Id);
+            if(account == null)
+            {
+                throw new RecordNotFoundException("User nout fpund");
+            }
+
+            account.FirstName = user.FirstName;
+            account.LastName = user.FirstName;
+            account.Address = user.Address;
+            account.Email = user.Email;
+            account.Password = user.Password;
+            account.PhoneNumber = user.PhoneNumber;
+            _database.SaveChanges();
+            return account;
+        }
+        public Account GetProfile(int id)
+        {
+            return _database.Accounts.SingleOrDefault(ac => ac.Id == id);
         }
     }
 }

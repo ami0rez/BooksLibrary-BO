@@ -1,7 +1,6 @@
-﻿using System;
+﻿using Core.Models.Identification;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace Core.Models
 {
@@ -20,7 +19,7 @@ namespace Core.Models
         public IList<BookAuthors> AuthorLinks { get; set; }
 
         [Required]
-        public Editor Editor { get; set; }
+        public Account Account { get; set; }
 
         [Required]
         public IList<BookTag> TagLinks { get; set; }

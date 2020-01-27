@@ -20,6 +20,8 @@ export const setHasMore = (hasMore) => ({
 
 
 export const getFilteresBooks = (filters) => (dispatch) => {
+	console.log(filters);
+
 	bookServices.getFiltered(filters)
 		.then(
 			result => {

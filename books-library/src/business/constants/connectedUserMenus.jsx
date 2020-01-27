@@ -17,7 +17,7 @@ export const AdminMenu = [
     },
     {
         name: "Manage Profile",
-        path: "/admin/profile",
+        path: "/profile",
     },
     {
         name: "Logout",
@@ -32,7 +32,7 @@ export const EditorMenu = [
     },
     {
         name: "Manage Profile",
-        path: "/admin/editor/profile",
+        path: "/profile",
     },
     {
         name: "Logout",

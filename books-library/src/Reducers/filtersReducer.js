@@ -1,9 +1,9 @@
-import { UPDATE_FILTERS, SET_OPTIONS } from "../Actions/filterActions"
+import { UPDATE_FILTERS, SET_OPTIONS, SET_BOOK_NAME } from "../Actions/filterActions"
 
 
 const initialState = {
   filters: {},
-  options: {}
+  options: { authors: [], editors: [], categories: [], subCategories: [], tags: [], tag: [] },
 }
 
 export default (state = initialState, action) => {
@@ -16,7 +16,18 @@ export default (state = initialState, action) => {
     case SET_OPTIONS:
       return ({
         ...state,
-        options: action.payload
+        options: {
+          ...state.options,
+          ...action.payload
+        }
+      });
+    case SET_BOOK_NAME:
+      return ({
+        ...state,
+        options: {
+          ...state.options,
+          bookName: action.payload,
+        }
       });
     default:
       return state;

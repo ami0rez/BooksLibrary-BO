@@ -1,4 +1,5 @@
 ﻿using Core.Models;
+using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -11,6 +12,7 @@ namespace Core.Queries
         public string Name { get; set; }
 
         [Required]
+        public IFormFile Image { get; set; }
         public string ImageBase64 { get; set; }
 
         [Required]
@@ -23,7 +25,8 @@ namespace Core.Queries
         public IList<int> Tags { get; set; }
 
         [Required]
-        public Ressource Ressource { get; set; }
+        public IFormFile Ressource { get; set; }
+        public string RessourcePath { get; set; }
 
         [Required]
         public IList<int> SubCategories { get; set; }

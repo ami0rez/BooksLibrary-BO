@@ -9,7 +9,8 @@ namespace ServicesLayer.BooksLibrary
         Book Create(CreateBookQuery query);
         void Delete(int id);
         IEnumerable<Book> ReadAll();
-        Book ReadOne(int id);
+        IEnumerable<BookResponse> GetEditorBooks(int id);
+        BookResponse ReadOne(int id);
         void Update(Book Book);
     }
 }

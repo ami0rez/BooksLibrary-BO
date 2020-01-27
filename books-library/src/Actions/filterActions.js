@@ -3,6 +3,7 @@ import { getFilteresBooks } from "./bookActions";
 
 export const UPDATE_FILTERS = 'UPDATE_FILTERS';
 export const SET_OPTIONS = 'SET_OPTIONS';
+export const SET_BOOK_NAME = 'SET_BOOK_NAME';
 
 export const updateFilters = (filter) => ({
   type: UPDATE_FILTERS,
@@ -12,6 +13,11 @@ export const updateFilters = (filter) => ({
 export const setSelectedOptions = (options) => ({
   type: SET_OPTIONS,
   payload: options,
+})
+
+export const setBookName = (name) => ({
+  type: SET_BOOK_NAME,
+  payload: name,
 })
 
 
