@@ -14,7 +14,6 @@ import TagForm from './components/Administration/Forms/TagForm';
 import CategoryForm from './components/Administration/Forms/CategoryForm';
 import BookFormContainer from './components/homePage/components/Details/BookFormContainer';
 import ProfileForm from './components/Administration/Forms/ProfileForm';
-import Logout from './components/logout/Logout';
 import LogoutContainer from './components/logout/LogoutContainer';
 import BookForm from './components/Administration/Forms/BookForm';
 
@@ -24,16 +23,16 @@ function App() {
       <Header />
       <Router history={history}>
         <div>
-          <PrivateRoute exact path="/" component={HomePage} />
-          <Route path="/login" component={LoginPageContainer} />
-          <Route path="/administration/editors" render={() => (<AdministrationContainer entityName="Editor" Form={EditorForm} />)} />
-          <Route path="/administration/categories" render={() => (<AdministrationContainer entityName="Categories" Form={CategoryForm} />)} />
-          <Route path="/administration/tags" render={() => (<AdministrationContainer entityName="Tags" Form={TagForm} />)} />
-          <Route path="/administration/authors" render={() => (<AdministrationContainer entityName="Author" Form={EditorForm} />)} />
-          <Route path="/books/:bookid" render={() => (<BookFormContainer />)} />
-          <Route path="/Profile" render={() => (<ProfileForm />)} />
-          <Route path="/user/logout" render={() => (<LogoutContainer />)} />
-          <Route path="/admin/editor/books" render={() => (<AdministrationContainer entityName="books/editor" Form={BookForm} />)} />
+          <Route exact path="/" component={HomePage} />
+          <PrivateRoute path="/login" component={LoginPageContainer} />
+          <PrivateRoute path="/administration/editors" render={() => (<AdministrationContainer entityName="Editor" Form={EditorForm} />)} />
+          <PrivateRoute path="/administration/categories" render={() => (<AdministrationContainer entityName="Categories" Form={CategoryForm} />)} />
+          <PrivateRoute path="/administration/tags" render={() => (<AdministrationContainer entityName="Tags" Form={TagForm} />)} />
+          <PrivateRoute path="/administration/authors" render={() => (<AdministrationContainer entityName="Author" Form={EditorForm} />)} />
+          <PrivateRoute path="/books/:bookid" render={() => (<BookFormContainer />)} />
+          <PrivateRoute path="/Profile" render={() => (<ProfileForm />)} />
+          <PrivateRoute path="/user/logout" render={() => (<LogoutContainer />)} />
+          <PrivateRoute path="/admin/editor/books" render={() => (<AdministrationContainer entityName="books/editor" Form={BookForm} />)} />
         </div>
       </Router>
     </>
