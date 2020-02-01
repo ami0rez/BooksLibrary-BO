@@ -94,7 +94,7 @@ export const updateEntry = (entityName, id, newEntry) => (dispatch) => {
     })
 }
 export const createEntry = (entityName, entry) => (dispatch) => {
-  AdministrationServices.create(entityName, entry)
+  return AdministrationServices.create(entityName, entry)
     .then((result) => {
       dispatch(
         addLocalEntry(result),

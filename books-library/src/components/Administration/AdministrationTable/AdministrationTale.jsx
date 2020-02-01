@@ -57,7 +57,7 @@ const AdministrationTable = ({ content, entityName, deleteEntry, getAllEntries, 
 	const columns = content.length
 		? [
 			...Object.keys(content[0]).map((entry) => (
-				(Array.isArray(content[0][entry]) || Object.keys(content[0][entry]).length)
+				(Array.isArray(content[0][entry]))
 					? { dataField: entry, text: entry, formatter: listFormatter, }
 					: { dataField: entry, text: entry }
 			)

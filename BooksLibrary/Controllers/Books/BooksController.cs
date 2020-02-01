@@ -24,6 +24,7 @@ namespace BooksLibrary.Controllers.Books
             _Books = Books;
         }
         // GET: api/Books
+        [AllowAnonymous]
         [HttpGet]
         public IEnumerable<Book> Get()
         {
@@ -39,6 +40,7 @@ namespace BooksLibrary.Controllers.Books
             return _Books.GetEditorBooks(int.Parse(id));
         }
 
+        [AllowAnonymous]
         // GET: api/Books/5
         [HttpGet("{id}", Name = "GetBooks")]
         public BookResponse Get(int id)
@@ -46,6 +48,7 @@ namespace BooksLibrary.Controllers.Books
             return _Books.ReadOne(id);
         }
         // GET: api/FilterBooks
+        [AllowAnonymous]
         [HttpPost("api/books/filterBooks", Name = "FilterBooks")]
         public IEnumerable<BookResponse> FilterBooks([FromBody] FilterQuery query)
         {
@@ -53,6 +56,7 @@ namespace BooksLibrary.Controllers.Books
         }
 
         // GET: api/Books/5
+        [AllowAnonymous]
         [HttpPost("api/books/filterOptions/", Name = "GetFilters")]
         public FilterResponse GetFilters([FromBody] FilterQuery query)
         {

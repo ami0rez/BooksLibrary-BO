@@ -66,7 +66,11 @@ namespace ServicesLayer.BooksLibrary
             };
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
-            a.Password = "password0";
+            if (a.Password == string.Empty)
+            {
+                a.Password = "password0";
+            }
+            a.Role = Core.Enums.UserRole.Editor;
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]

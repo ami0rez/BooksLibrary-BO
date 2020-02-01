@@ -16,6 +16,7 @@ import BookFormContainer from './components/homePage/components/Details/BookForm
 import ProfileForm from './components/Administration/Forms/ProfileForm';
 import LogoutContainer from './components/logout/LogoutContainer';
 import BookForm from './components/Administration/Forms/BookForm';
+import SubscriotionFrom from './components/Administration/Forms/SubscriotionFrom';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <div>
           <Route exact path="/" component={HomePage} />
           <PrivateRoute path="/login" component={LoginPageContainer} />
+          <PrivateRoute path="/subscribe" component={SubscriotionFrom} />
           <PrivateRoute path="/administration/editors" render={() => (<AdministrationContainer entityName="Editor" Form={EditorForm} />)} />
           <PrivateRoute path="/administration/categories" render={() => (<AdministrationContainer entityName="Categories" Form={CategoryForm} />)} />
           <PrivateRoute path="/administration/tags" render={() => (<AdministrationContainer entityName="Tags" Form={TagForm} />)} />
