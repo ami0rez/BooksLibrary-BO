@@ -28,6 +28,10 @@ namespace ServicesLayer.BooksLibrary
                 .Include(b => b.TagLinks)
                     .ThenInclude(taglink => taglink.Tag)
                 .SingleOrDefault(t => t.Id == id);
+            if(book == null)
+            {
+                return response;
+            }
             response.Id = book.Id;
             response.Name = book.Name;
             response.Base64Image = book.BookImage;

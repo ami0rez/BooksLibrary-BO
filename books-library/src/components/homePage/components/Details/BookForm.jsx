@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { Form, Button, Image } from 'react-bootstrap'
+import { Form, Button, Image, Container } from 'react-bootstrap'
 import { useEffect } from 'react'
 import FormProperty from '../../../Administration/Forms/FormProperty'
 import { useParams } from 'react-router-dom'
@@ -45,12 +45,13 @@ const BookForm = ({ id, entry, getEntry, updateEntry, createEntry, onCancel, onS
   }
 
   const handleCancel = () => {
-    onCancel();
+    window.location.href = "/"
   }
   console.log(formContent);
 
   return (
-    <div>
+    <Container>
+      <br />
       <FormProperty
         title="Cover"
       >
@@ -96,12 +97,12 @@ const BookForm = ({ id, entry, getEntry, updateEntry, createEntry, onCancel, onS
         </FormProperty>
         <Button variant="primary" type="reset" onClick={handleCancel}>
           Return
-        </Button>
+        </Button><br /><br />
         <Button variant="primary" type="submit">
-          Read
+          Download
         </Button>
       </Form>
-    </div>
+    </Container>
   )
 }
 

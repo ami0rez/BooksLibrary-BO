@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
-import { Card, Button } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import Assets from '../../../../../business/constants/Assets';
 
-const BookCard = ({ base64Image, title, url }) => {
+const BookCard = ({ base64Image, title, url, id }) => {
   const [bookImage, setBookImage] = useState(base64Image)
   const handleClick = () => {
-    var win = window.open(url, '_blank');
-    win.focus();
+    window.location.href = `/books/${id}`;
   }
   return (
     <div id="book-card">
@@ -29,6 +28,7 @@ const BookCard = ({ base64Image, title, url }) => {
           <Card.Img
             id="card-footer-image"
             variant="top"
+            onClick={handleClick}
             src={Assets.DownloadIcon}
           />
         </Card.Footer>

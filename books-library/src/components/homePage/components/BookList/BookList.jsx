@@ -30,6 +30,7 @@ const BookList = ({ books, addFilteresBooks, hasMore }) => {
                 base64Image={book.base64Image}
                 title={book.name}
                 url={book.url}
+                id={book.id}
               />
             </div>
           ))

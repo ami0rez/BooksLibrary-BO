@@ -25,13 +25,13 @@ function App() {
       <Router history={history}>
         <div>
           <Route exact path="/" component={HomePage} />
+          <Route path="/books/:bookid" render={() => (<BookFormContainer />)} />
           <PrivateRoute path="/login" component={LoginPageContainer} />
           <PrivateRoute path="/subscribe" component={SubscriotionFrom} />
           <PrivateRoute path="/administration/editors" render={() => (<AdministrationContainer entityName="Editor" Form={EditorForm} />)} />
           <PrivateRoute path="/administration/categories" render={() => (<AdministrationContainer entityName="Categories" Form={CategoryForm} />)} />
           <PrivateRoute path="/administration/tags" render={() => (<AdministrationContainer entityName="Tags" Form={TagForm} />)} />
           <PrivateRoute path="/administration/authors" render={() => (<AdministrationContainer entityName="Author" Form={EditorForm} />)} />
-          <PrivateRoute path="/books/:bookid" render={() => (<BookFormContainer />)} />
           <PrivateRoute path="/Profile" render={() => (<ProfileForm />)} />
           <PrivateRoute path="/user/logout" render={() => (<LogoutContainer />)} />
           <PrivateRoute path="/admin/editor/books" render={() => (<AdministrationContainer entityName="books/editor" Form={BookForm} />)} />

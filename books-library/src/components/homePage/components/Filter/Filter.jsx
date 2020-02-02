@@ -44,21 +44,21 @@ const Filter = ({ options, filters, getFilters }) => {
         title="Category"
         options={filters.categories}
         onChange={(value => handleChange({ categories: value }))}
-        selectedValue="ZZZ"
+        selectedValue=""
       />
       {/* SubCategory */}
       <SingleFilter
         title="SubCategory"
         options={filters.subCategories}
         onChange={(value => handleChange({ subCategories: value }))}
-        selectedValue="ZZZ"
+        selectedValue=""
       />
       {/* Tags */}
       <SingleFilter
         title="Tags"
         options={filters.tags}
         onChange={(value => handleChange({ tags: value }))}
-        selectedValue="ZZZ"
+        selectedValue=""
       />
     </div>
   )
